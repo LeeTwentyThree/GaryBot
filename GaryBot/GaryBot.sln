@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GaryBotProgram", "GaryBotProgram\GaryBotProgram.csproj", "{6C728A28-A9D3-4D91-912D-8B35D49F0231}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GaryBotCore", "GaryBotCore\GaryBotCore.csproj", "{4F40B0E2-5BFC-42C5-9EE9-CA4FA47F0139}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6C728A28-A9D3-4D91-912D-8B35D49F0231}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C728A28-A9D3-4D91-912D-8B35D49F0231}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C728A28-A9D3-4D91-912D-8B35D49F0231}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C728A28-A9D3-4D91-912D-8B35D49F0231}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F40B0E2-5BFC-42C5-9EE9-CA4FA47F0139}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F40B0E2-5BFC-42C5-9EE9-CA4FA47F0139}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F40B0E2-5BFC-42C5-9EE9-CA4FA47F0139}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F40B0E2-5BFC-42C5-9EE9-CA4FA47F0139}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
