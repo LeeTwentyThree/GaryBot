@@ -10,7 +10,7 @@ public class InputSenderBase
     public const int DwTypeHardware = 2;
 
     [StructLayout(LayoutKind.Sequential)]
-    protected struct MouseInput {
+    public struct MouseInput {
         public int dx;
         public int dy;
         public int mouseData;
@@ -20,7 +20,7 @@ public class InputSenderBase
     }
     
     [StructLayout(LayoutKind.Sequential)]
-    protected struct KeyboardInput {
+    public struct KeyboardInput {
         // The virtual-key code: https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
         public VirtualKeyShort wVk;
         public ScanCodeShort wScan;
@@ -30,7 +30,7 @@ public class InputSenderBase
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    protected struct Input
+    public struct Input
     {
         public uint dwType;
         public InputUnion u;
@@ -49,7 +49,7 @@ public class InputSenderBase
     }
 
     [StructLayout(LayoutKind.Explicit)]
-    protected struct InputUnion
+    public struct InputUnion
     {
         [FieldOffset(0)]
         internal MouseInput mi;
@@ -58,7 +58,7 @@ public class InputSenderBase
     }
     
     [Flags]
-    protected enum DwFlags : uint
+    public enum DwFlags : uint
     {
         None,
         ExtendedKey = 0x0001,

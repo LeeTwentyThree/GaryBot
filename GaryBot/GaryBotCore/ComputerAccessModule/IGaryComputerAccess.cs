@@ -1,4 +1,5 @@
 using GaryBotCore.ComputerAccessModule.Controllers;
+using GaryBotCore.UtilityModule;
 
 namespace GaryBotCore.ComputerAccessModule;
 
@@ -10,6 +11,10 @@ public interface IGaryComputerAccess
     Task LeftClick();
     Task RightClick();
     Task TypeCharacter(char character);
+    Task TypeKey(ScanCodeShort key);
+    Task ReleaseKey(ScanCodeShort key);
     Task TypeText(string text);
+    Task PerformHotkey(ScanCodeShort key, HotkeyModifier modifier);
     Task PasteText(string text);
+    Task PressVirtualKey(VirtualKeyShort virtualKey);
 }

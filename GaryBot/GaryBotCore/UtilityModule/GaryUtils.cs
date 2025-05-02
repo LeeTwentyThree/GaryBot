@@ -13,30 +13,18 @@ public static class GaryUtils
 
     public static short ConvertCharacterToHardwareKey(char c)
     {
-        if (_hardwareKeys == null)
-        {
-            BuildHardwareKeyDictionary();
-        }
-
-        if (_hardwareKeys.TryGetValue(c, out var value))
-        {
-            return value;
-        }
-
-        Console.WriteLine("Failed to get hardware key code for character: " + c);
-        return 0;
+        throw new NotImplementedException();
     }
-
-    private static void BuildHardwareKeyDictionary()
+    
+    public static ScanCodeShort ConvertHotkeyModifierToScanCode(HotkeyModifier modifier)
     {
-        _hardwareKeys = new Dictionary<char, short>();
-        for (var i = 0; i < 1024; i++)
+        return modifier switch
         {
-            var character = (char)i;
-            var scan = VkKeyScan(character);
-            if (scan == 0) continue;
-            _hardwareKeys[character] = scan;
-        }
+            HotkeyModifier.Control => ScanCodeShort.CONTROL,
+            HotkeyModifier.Shift => ScanCodeShort.SHIFT,
+            HotkeyModifier.Alt => ScanCodeShort.LMENU,
+            _ => throw new NotImplementedException("Hotkey modifier not implemented: " + modifier)
+        };
     }
     
     [DllImport("user32.dll")]

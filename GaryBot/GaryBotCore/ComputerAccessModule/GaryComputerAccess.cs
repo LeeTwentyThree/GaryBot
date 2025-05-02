@@ -1,4 +1,5 @@
 using GaryBotCore.ComputerAccessModule.Controllers;
+using GaryBotCore.UtilityModule;
 
 namespace GaryBotCore.ComputerAccessModule;
 
@@ -6,6 +7,7 @@ public class GaryComputerAccess : IGaryComputerAccess
 {
     private readonly MouseController _mouseController = new();
     private readonly KeyboardController _keyboardController = new();
+    private readonly ClipboardController _clipboardController = new();
 
     public async Task SetMousePosition(Point position)
     {
@@ -39,6 +41,16 @@ public class GaryComputerAccess : IGaryComputerAccess
         await _keyboardController.TypeCharacterAsync(character);
     }
 
+    public async Task TypeKey(ScanCodeShort key)
+    {
+        await _keyboardController.TypeKey(key);
+    }
+
+    public async Task ReleaseKey(ScanCodeShort key)
+    {
+        await _keyboardController.ReleaseKey(key);
+    }
+
     public async Task TypeText(string text)
     {
         foreach (var character in text)
@@ -47,8 +59,27 @@ public class GaryComputerAccess : IGaryComputerAccess
         }
     }
 
-    public Task PasteText(string text)
+    public async Task PerformHotkey(ScanCodeShort key, HotkeyModifier modifier)
     {
-        throw new NotImplementedException();
+        await _keyboardController.PerformHotkey(key, modifier);
+    }
+
+    public async Task PasteText(string text)
+    {
+        await _clipboardController.SetClipboard(text);
+        await _keyboardController.PerformHotkey(ScanCodeShort.KEY_V, HotkeyModifier.Control);
+    }
+
+    public async Task PressVirtualKey(VirtualKeyShort virtualKey)
+    {
+        await _keyboardController.EnterCustomKeyboardInput(new InputSenderBase.Input(new InputSenderBase.KeyboardInput
+        {
+            wVk = virtualKey,
+        }));
+        await _keyboardController.EnterCustomKeyboardInput(new InputSenderBase.Input(new InputSenderBase.KeyboardInput
+        {
+            wVk = virtualKey,
+            dwFlags = InputSenderBase.DwFlags.KeyUp
+        }));
     }
 }

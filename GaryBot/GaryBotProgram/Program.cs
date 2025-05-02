@@ -1,7 +1,7 @@
 ﻿using GaryBotCore.BotInstanceModule;
 using GaryBotCore.ComputerAccessModule;
 using GaryBotCore.JobModule;
-using GaryBotCore.JobModule.DefaultInstructions;
+using GaryBotCore.SchedulerModule;
 
 namespace GaryBotProgram;
 
@@ -18,11 +18,9 @@ public static class Program
 
     private static async void MainThread()
     {
-        var bot = new GaryBotInstance(new BotSettings());
         var access = new GaryComputerAccess();
-        var job = new GaryJob(access,
-            new JobSettings(100),
-            new TestInstructions());
-        await bot.RunJobAsync(job);
+        var bot = new GaryBotInstance(new BotSettings(), access);
+        var scheduler = new BotScheduler(bot, BuiltInSchedules.SpamSubnauticaSchedule);
+        await scheduler.RunAsync();
     }
 }

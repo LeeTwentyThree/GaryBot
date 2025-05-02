@@ -1,11 +1,10 @@
+using GaryBotCore.ComputerAccessModule;
 using GaryBotCore.JobModule;
 
 namespace GaryBotCore.BotInstanceModule;
 
-public class GaryBotInstance(BotSettings settings) : IGaryJobHost
+public class GaryBotInstance(BotSettings settings, IGaryComputerAccess computerAccess) : IGaryJobHost
 {
-    public BotSettings Settings { get; } = settings;
-
     private GaryJob? _currentJob;
 
     public bool AcceptingNewJob => _currentJob == null || !_currentJob.IsRunning();
@@ -20,7 +19,7 @@ public class GaryBotInstance(BotSettings settings) : IGaryJobHost
         try
         {
             _currentJob = job;
-            return await job.PerformAsync();
+            return await job.PerformAsync(computerAccess);
         }
         catch (Exception e)
         {

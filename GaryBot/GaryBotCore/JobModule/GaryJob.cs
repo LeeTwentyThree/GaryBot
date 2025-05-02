@@ -2,16 +2,14 @@ using GaryBotCore.ComputerAccessModule;
 
 namespace GaryBotCore.JobModule;
 
-public class GaryJob(GaryComputerAccess computerAccess, JobSettings settings, IGaryJobInstructions instructions)
+public class GaryJob(JobSettings settings, IGaryJobInstructions instructions)
 {
-    private readonly IGaryComputerAccess _computerAccess = computerAccess;
-
     private bool _stopping;
     private bool _running;
 
     private Task? _currentTask;
 
-    public async Task<JobResult> PerformAsync()
+    public async Task<JobResult> PerformAsync(IGaryComputerAccess computerAccess)
     {
         _running = true;
         
