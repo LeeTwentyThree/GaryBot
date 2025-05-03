@@ -76,4 +76,9 @@ public class GaryJob(JobSettings settings, IGaryJobInstructions instructions)
         _running = false;
         _currentTask = null;
     }
+
+    public override string ToString()
+    {
+        return instructions.GetJobDescription();
+    }
 }

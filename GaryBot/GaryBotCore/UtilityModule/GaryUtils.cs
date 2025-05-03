@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using GaryBotCore.ComputerAccessModule.Controllers;
 
 namespace GaryBotCore.UtilityModule;
 
@@ -30,4 +31,16 @@ public static class GaryUtils
     [DllImport("user32.dll")]
     private static extern short VkKeyScan(char ch);
 
+    public static MouseButton ConvertMouseButton(MouseButtons windowsVersion, bool down)
+    {
+        switch (windowsVersion)
+        {
+            case MouseButtons.Left:
+                return down ? MouseButton.LeftDown : MouseButton.LeftUp;
+            case MouseButtons.Right:
+                return down ? MouseButton.RightDown : MouseButton.RightUp;
+            default:
+                return MouseButton.None;
+        }
+    }
 }

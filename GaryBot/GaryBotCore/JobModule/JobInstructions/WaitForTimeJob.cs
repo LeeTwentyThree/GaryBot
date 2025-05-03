@@ -11,4 +11,9 @@ public class WaitForTimeJob(DateTime time) : IGaryJobInstructions
             yield return Task.Delay(100);
         }
     }
+
+    public string GetJobDescription()
+    {
+        return "Waiting until " + time.ToString("f") + "...";
+    }
 }

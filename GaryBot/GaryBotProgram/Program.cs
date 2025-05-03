@@ -1,26 +1,26 @@
 ﻿using GaryBotCore.BotInstanceModule;
 using GaryBotCore.ComputerAccessModule;
-using GaryBotCore.JobModule;
+using GaryBotCore.RecordingModule;
+using GaryBotCore.RecordingModule.Instructions.MoveCursor;
 using GaryBotCore.SchedulerModule;
+using GaryBotCore.SchedulerModule.BuiltInSchedules;
 
 namespace GaryBotProgram;
 
 public static class Program
 {
-    private static void Main(string[] args)
+    private static GaryHotkeys? _hotkeys;
+
+    private static async Task Main(string[] args)
     {
-        var thread = new Thread(MainThread);
-        thread.Start();
-        thread.Join();
-        Console.WriteLine("Press any key to exit");
-        Console.Read();
+        await MainThread();
     }
 
-    private static async void MainThread()
+    private static async Task MainThread()
     {
         var access = new GaryComputerAccess();
         var bot = new GaryBotInstance(new BotSettings(), access);
-        var scheduler = new BotScheduler(bot, BuiltInSchedules.SpamSubnauticaSchedule);
+        var scheduler = new BotScheduler(bot, new SpamLillySchedule(), access);
         await scheduler.RunAsync();
     }
 }

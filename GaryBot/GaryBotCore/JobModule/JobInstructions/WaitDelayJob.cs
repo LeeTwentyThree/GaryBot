@@ -8,4 +8,9 @@ public class WaitDelayJob(int milliseconds) : IGaryJobInstructions
     {
         yield return Task.Delay(milliseconds);
     }
+
+    public string GetJobDescription()
+    {
+        return $"Waiting {milliseconds / 1000f:0.000} seconds";
+    }
 }

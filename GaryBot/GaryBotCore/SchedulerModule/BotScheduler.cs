@@ -1,9 +1,11 @@
 using GaryBotCore.BotInstanceModule;
+using GaryBotCore.ComputerAccessModule;
 using GaryBotCore.JobModule;
+using GaryBotCore.UtilityModule;
 
 namespace GaryBotCore.SchedulerModule;
 
-public class BotScheduler(GaryBotInstance bot, Func<IEnumerator<GaryJob>> jobFlow)
+public class BotScheduler(GaryBotInstance bot, IBotSchedule schedule, IGaryComputerAccess computerAccess)
 {
     private bool _running;
     private bool _stopping;
@@ -13,10 +15,12 @@ public class BotScheduler(GaryBotInstance bot, Func<IEnumerator<GaryJob>> jobFlo
     public async Task RunAsync()
     {
         _running = true;
-        var flow = jobFlow.Invoke();
+        await schedule.ResolveDependencies(computerAccess);
+        var flow = schedule.JobSchedule();
         while (!_stopping && flow.MoveNext())
         {
             _activeJob = flow.Current;
+            LoggingUtility.Log($"RUNNING JOB: {_activeJob}");
             await bot.RunJobAsync(_activeJob);
         }
         Reset();

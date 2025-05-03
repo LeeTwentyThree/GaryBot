@@ -8,6 +8,7 @@ public class GaryComputerAccess : IGaryComputerAccess
     private readonly MouseController _mouseController = new();
     private readonly KeyboardController _keyboardController = new();
     private readonly ClipboardController _clipboardController = new();
+    private readonly ProgramController _programController = new();
 
     public async Task SetMousePosition(Point position)
     {
@@ -62,6 +63,16 @@ public class GaryComputerAccess : IGaryComputerAccess
     public async Task PerformHotkey(ScanCodeShort key, HotkeyModifier modifier)
     {
         await _keyboardController.PerformHotkey(key, modifier);
+    }
+
+    public async Task OpenApplication(string name, long timeOutMs)
+    {
+        await _programController.OpenProgram(name, timeOutMs);
+    }
+
+    public async Task CloseApplication(string name)
+    {
+        await _programController.CloseProgram(name);
     }
 
     public async Task PasteText(string text)
