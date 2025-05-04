@@ -10,11 +10,6 @@ public class AutoBuildModSchedule(string modFolderName) : SelfResolvingBotSchedu
 {
     public override IEnumerator<GaryJob> JobSchedule()
     {
-        var getClipboardText = new GetClipboardTextJob();
-        var job = new GaryJob(JobSettings.Default, getClipboardText);
-        yield return job;
-        Console.WriteLine(getClipboardText.JobResult);
-        
         while (!ShouldBreak())
         {
             // Fetch GitHub
@@ -104,6 +99,12 @@ public class AutoBuildModSchedule(string modFolderName) : SelfResolvingBotSchedu
             // click file at bottom right, then click share, change access, copy link
             yield return new GaryJob(JobSettings.Default,
                 new PerformGaryRecording((Recording)GetDependencyValue("ShareFileAndCopyLink")));
+            yield return new GaryJob(JobSettings.Default,
+                new WaitDelayJob(1000));
+            var getClipboardText = new GetClipboardTextJob();
+            var job = new GaryJob(JobSettings.Default, getClipboardText);
+            yield return job;
+            var googleDriveLink = getClipboardText.JobResult;
             // wait a bit
             yield return new GaryJob(JobSettings.Default,
                 new WaitDelayJob(GetSavedInteger("StartDiscordDelay") * 1000));
@@ -120,7 +121,7 @@ public class AutoBuildModSchedule(string modFolderName) : SelfResolvingBotSchedu
             yield return new GaryJob(JobSettings.Default,
                 new PerformGaryRecording((Recording)GetDependencyValue("NavigateToAutoBuildsChannel")));
             yield return new GaryJob(JobSettings.Default,
-                new SendMessageJob(GetBuildMessageFormat(Clipboard.GetText())));
+                new SendMessageJob(GetBuildMessageFormat(googleDriveLink)));
             yield return new GaryJob(JobSettings.Default,
                 new WaitDelayJob(5000));
             yield return new GaryJob(JobSettings.Default,
@@ -145,7 +146,8 @@ public class AutoBuildModSchedule(string modFolderName) : SelfResolvingBotSchedu
 
     private GaryJob Delay()
     {
-        return new GaryJob(JobSettings.Default, new WaitForTimeJob(DateTime.Now + TimeSpan.FromHours(12)));
+        return new GaryJob(JobSettings.Default,
+            new WaitForTimeJob(DateTime.Now + TimeSpan.FromHours(GetSavedInteger("BuildDelay"))));
     }
 
     private string GetBuildMessageFormat(string buildLink)
@@ -158,6 +160,8 @@ public class AutoBuildModSchedule(string modFolderName) : SelfResolvingBotSchedu
 
     public override IEnumerable<IScheduleDependency> ScheduleDependencies { get; } = new IScheduleDependency[]
     {
+        new StringDependency("BuildDelay", "The number of hours between scheduled builds"),
+
         // GitHub
         new StringDependency("GithubDesktopPath", "Path to GitHub desktop"),
         new StringDependency("GithubDesktopLoadDelay",
