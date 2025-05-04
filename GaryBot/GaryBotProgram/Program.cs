@@ -1,7 +1,6 @@
 ﻿using GaryBotCore.BotInstanceModule;
 using GaryBotCore.ComputerAccessModule;
 using GaryBotCore.RecordingModule;
-using GaryBotCore.RecordingModule.Instructions.MoveCursor;
 using GaryBotCore.SchedulerModule;
 using GaryBotCore.SchedulerModule.BuiltInSchedules;
 

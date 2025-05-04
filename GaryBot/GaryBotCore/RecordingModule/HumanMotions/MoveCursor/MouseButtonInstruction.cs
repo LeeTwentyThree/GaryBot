@@ -1,6 +1,6 @@
 using GaryBotCore.ComputerAccessModule;
 
-namespace GaryBotCore.RecordingModule.Instructions.MoveCursor;
+namespace GaryBotCore.RecordingModule.HumanMotions.MoveCursor;
 
 [Serializable]
 public class MouseButtonInstruction(MouseButtonDto mouseButtonDto) : IRecordingInstruction

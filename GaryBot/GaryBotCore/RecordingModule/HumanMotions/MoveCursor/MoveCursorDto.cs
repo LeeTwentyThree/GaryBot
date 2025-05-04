@@ -1,9 +1,9 @@
 using System.Text.Json.Serialization;
 
-namespace GaryBotCore.RecordingModule.Instructions.MoveCursor;
+namespace GaryBotCore.RecordingModule.HumanMotions.MoveCursor;
 
 [Serializable]
-public class MoveCursorDto(int x, int y) : InstructionDtoBase("MoveCursor")
+public class MoveCursorDto(int x, int y) : HumanMotionDtoBase("MoveCursor")
 {
     [JsonConstructor]
     public MoveCursorDto() : this(default, default)

@@ -1,4 +1,4 @@
-using GaryBotCore.RecordingModule.Instructions.MoveCursor;
+using GaryBotCore.RecordingModule.HumanMotions.MoveCursor;
 
 namespace GaryBotCore.RecordingModule;
 

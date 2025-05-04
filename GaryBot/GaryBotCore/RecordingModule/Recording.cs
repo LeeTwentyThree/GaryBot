@@ -1,5 +1,5 @@
 using System.Text.Json.Serialization;
-using GaryBotCore.RecordingModule.Instructions;
+using GaryBotCore.RecordingModule.HumanMotions;
 
 namespace GaryBotCore.RecordingModule;
 
@@ -7,13 +7,13 @@ namespace GaryBotCore.RecordingModule;
 public class Recording : IRecording, IJsonOnDeserialized
 {
     [JsonInclude]
-    private InstructionDtoBase[] _instructionsData;
+    private HumanMotionDtoBase[] _instructionsData;
     
     private IRecordingInstruction[]? _instructions;
 
     private InstructionFactory _instructionFactory = new();
 
-    public Recording(InstructionDtoBase[] instructionsData)
+    public Recording(HumanMotionDtoBase[] instructionsData)
     {
         _instructionsData = instructionsData;
         OnDeserialized();
