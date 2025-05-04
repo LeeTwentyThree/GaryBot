@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using GaryBotCore.ComputerAccessModule.Controllers;
 using GaryBotCore.UtilityModule;
 
@@ -68,6 +69,25 @@ public class GaryComputerAccess : IGaryComputerAccess
     public async Task OpenApplication(string name, long timeOutMs)
     {
         await _programController.OpenProgram(name, timeOutMs);
+    }
+
+    public async Task OpenFile(string path, string arguments, long timeOutMs)
+    {
+        var process = new Process();
+
+        process.StartInfo.FileName = "explorer";
+        var args = "\"" + path + "\"";
+        if (!string.IsNullOrEmpty(arguments)) args += " " + arguments;
+        process.StartInfo.Arguments = args;
+        process.Start();
+
+        await Task.Delay(1000);
+    }
+
+    public async Task ZipFile(string folder, string destination)
+    {
+        System.IO.Compression.ZipFile.CreateFromDirectory(folder, destination);
+        await Task.Delay(3000);
     }
 
     public async Task CloseApplication(string name)

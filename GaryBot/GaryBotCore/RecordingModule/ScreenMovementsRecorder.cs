@@ -9,7 +9,7 @@ namespace GaryBotCore.RecordingModule;
 public class ScreenMovementsRecorder : IScreenMovementsRecorder
 {
     private bool _doneRecording;
-    private Stopwatch _recordingStopwatch;
+    private Stopwatch? _recordingStopwatch;
 
     private int _recordDuration;
     
@@ -43,7 +43,10 @@ public class ScreenMovementsRecorder : IScreenMovementsRecorder
         await Task.Delay(600);
         Console.Beep(1000, 200);
         LoggingUtility.Log("Record now!");
+        
+        // EXECUTE MAIN RECORD LOGIC
         await Record();
+        
         LoggingUtility.Log("DONE");
         for (var i = 0; i < 3; i++)
         {

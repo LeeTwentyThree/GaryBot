@@ -16,6 +16,8 @@ public interface IGaryComputerAccess
     Task TypeText(string text);
     Task PerformHotkey(ScanCodeShort key, HotkeyModifier modifier);
     Task OpenApplication(string name, long timeOutMs);
+    Task OpenFile(string path, string arguments, long timeOutMs);
+    Task ZipFile(string folder, string destination);
     Task CloseApplication(string name);
     Task PasteText(string text);
     Task PressVirtualKey(VirtualKeyShort virtualKey);

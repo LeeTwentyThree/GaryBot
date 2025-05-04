@@ -12,10 +12,17 @@ public class BotScheduler(GaryBotInstance bot, IBotSchedule schedule, IGaryCompu
 
     private GaryJob? _activeJob;
     
+    public static bool EnableRerecordMode { get; private set; }
+    
     public async Task RunAsync()
     {
         _running = true;
+        Console.WriteLine("Enter 'Y' if you want to enter re-record mode. Otherwise, press Enter to continue.");
+        var result = Console.ReadLine();
+        EnableRerecordMode = result != null && result.Equals("y", StringComparison.CurrentCultureIgnoreCase);
         await schedule.ResolveDependencies(computerAccess);
+        LoggingUtility.Log("Press ENTER to begin the schedule!");
+        Console.ReadLine();
         var flow = schedule.JobSchedule();
         while (!_stopping && flow.MoveNext())
         {

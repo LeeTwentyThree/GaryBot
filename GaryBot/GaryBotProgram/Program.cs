@@ -1,6 +1,6 @@
-﻿using GaryBotCore.BotInstanceModule;
+﻿using System.Diagnostics;
+using GaryBotCore.BotInstanceModule;
 using GaryBotCore.ComputerAccessModule;
-using GaryBotCore.RecordingModule;
 using GaryBotCore.SchedulerModule;
 using GaryBotCore.SchedulerModule.BuiltInSchedules;
 
@@ -8,8 +8,6 @@ namespace GaryBotProgram;
 
 public static class Program
 {
-    private static GaryHotkeys? _hotkeys;
-
     private static async Task Main(string[] args)
     {
         await MainThread();
@@ -19,7 +17,7 @@ public static class Program
     {
         var access = new GaryComputerAccess();
         var bot = new GaryBotInstance(new BotSettings(), access);
-        var scheduler = new BotScheduler(bot, new SpamLillySchedule(), access);
+        var scheduler = new BotScheduler(bot, new AutoBuildModSchedule("TheRedPlague"), access);
         await scheduler.RunAsync();
     }
 }

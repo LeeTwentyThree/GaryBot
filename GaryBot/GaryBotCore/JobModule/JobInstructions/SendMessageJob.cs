@@ -14,6 +14,6 @@ public class SendMessageJob(string message) : IGaryJobInstructions
 
     public string GetJobDescription()
     {
-        return $"Sending message {message}'";
+        return $"Pasting text: \"{message}\"'";
     }
 }

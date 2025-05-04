@@ -8,6 +8,8 @@ public class GaryJob(JobSettings settings, IGaryJobInstructions instructions)
     private bool _running;
 
     private Task? _currentTask;
+    
+    public IGaryJobInstructions GetInstructions() => instructions;
 
     public async Task<JobResult> PerformAsync(IGaryComputerAccess computerAccess)
     {

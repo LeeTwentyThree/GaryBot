@@ -20,6 +20,7 @@ public abstract class SelfResolvingBotSchedule : IBotSchedule
             }
             await dependency.Resolve(computerAccess);
         }
+        LoggingUtility.Log("All dependencies resolved!");
     }
 
     public abstract IEnumerator<GaryJob> JobSchedule();
