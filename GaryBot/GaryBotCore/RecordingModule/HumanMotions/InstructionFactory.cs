@@ -1,6 +1,6 @@
 using GaryBotCore.RecordingModule.HumanMotions.MoveCursor;
 
-namespace GaryBotCore.RecordingModule;
+namespace GaryBotCore.RecordingModule.HumanMotions;
 
 public class InstructionFactory : IRecordingInstructionFactory
 {
