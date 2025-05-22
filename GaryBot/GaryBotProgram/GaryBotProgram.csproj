@@ -11,8 +11,4 @@
     <ItemGroup>
       <ProjectReference Include="..\GaryBotCore\GaryBotCore.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-      <PackageReference Include="GlobalHotkeys" Version="1.0.0.6" />
-    </ItemGroup>
 </Project>

@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using GaryBotCore.BotInstanceModule;
+﻿using GaryBotCore.BotInstanceModule;
 using GaryBotCore.ComputerAccessModule;
 using GaryBotCore.SchedulerModule;
 using GaryBotCore.SchedulerModule.BuiltInSchedules;
