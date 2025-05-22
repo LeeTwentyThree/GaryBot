@@ -5,7 +5,7 @@ using GaryBotCore.SchedulerModule.DependencyTypes;
 
 namespace GaryBotCore.SchedulerModule.BuiltInSchedules;
 
-public class SpamLillySchedule : SelfResolvingBotSchedule
+public class SpamDiscordMessageSchedule : SelfResolvingBotSchedule
 {
     public override IEnumerator<GaryJob> JobSchedule()
     {
